@@ -1,0 +1,59 @@
+<div class="container">
+    <h1 class="mt-4 mb-5">Get Live Status</h1>
+    <div class="row jumbotron">
+        <form class="form-group" #f="ngForm" (ngSubmit)="getStatus(f)">
+            <div class="form-group">
+                <label for="date" class="mr-10">Choose a Date</label>
+                <input ngModel name="date" #date="ngModel" type="date" class="form-control col-sm-16" id="date">
+            </div>
+            <div class="form-group">
+                <label for="number">Train Number</label>
+                <input ngModel name="numb" #numb="ngModel" type="text" class="form-control col-sm-16" id="number" placeholder="00000000">
+            </div>
+            <button type="submit" class="btn btn-danger">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class="cust-m-80" *ngIf="t_find==1">
+    <p>The train no. <code>{{ t_no }}</code> has started on {{ t_start_date }} </p>
+
+    <table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Station</th>
+        <th scope="col">Arrived at</th>
+        <th scope="col">Departured at</th>
+        <th scope="col">Delay in Arrival</th>
+        <th scope="col">Delay in Departure</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let route of t_routes">
+        <th scope="row">{{ route.SerialNo }}</th>
+        <td>{{ route.StationName }}<br>{{ route.StationCode }}</td>
+        <td>{{ route.ActualArrival }}</td>
+        <td>{{ route.ActualDeparture }}</td>
+        <td>{{ route.DelayInArrival }}</td>
+        <td>{{ route.DelayInDeparture }}</td>
+    </tr>
+    </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRoutes()">
+        </ngb-pagination>
+  
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshRoutes()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="cust-m-20" *ngIf="t_find==0">
+    <p class="text-center">No data found</p>
+</div>

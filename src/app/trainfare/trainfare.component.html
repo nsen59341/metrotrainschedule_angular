@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Train Fare</h1>
+    <form #f="ngForm" (ngSubmit)="getTrainFare(f)">
+        <div class="form-group row">
+            <label for="form" class="col-sm-2 col-form-label">From</label>
+            <div class="col-sm-10">
+                <select ngModel name="form" #form="ngModel" id="form" class="col-sm-5">
+                    <option *ngFor="let station of stations" value="{{station.val}}">{{station.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="to" class="col-sm-2 col-form-label">To</label>
+            <div class="col-sm-10">
+                <select ngModel name="to" #to="ngModel" id="to" class="col-sm-5">
+                    <option *ngFor="let station of stations" value="{{station.val}}">{{station.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="date" class="col-sm-2 col-form-label">Train Number</label>
+            <div class="col-sm-10">
+                <input ngModel name="numb" #numb="ngModel" type="text" class="form-control col-sm-5" id="number" placeholder="00000000">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="date" class="col-sm-2 col-form-label">Class</label>
+            <div class="col-sm-10">
+                <select ngModel name="class" #class="ngModel" id="class" class="col-sm-5">
+                    <option *ngFor="let clss of classes" value="{{clss.val}}">{{clss.name}}</option>
+                </select>
+                <!-- <input ngModel name="numb" #numb="ngModel" type="numb" class="form-control" id="number" placeholder="00000000"> -->
+            </div>
+        </div>
+        <button type="submit" class="btn btn-danger">Search</button>
+    </form>
+</div>
+

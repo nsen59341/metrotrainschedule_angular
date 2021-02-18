@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>View Available Trains</h1>
+    <form class="form-inline" #f="ngForm" (ngSubmit)="getTrains(f)">
+        <div class="form-group">
+            <label for="st_code"><b>Station</b></label>
+            <select ngModel name="st_code" #st_code="ngModel" class="form-control" id="st_code">
+                <option *ngFor="let station of stations" value="{{station.val}}">{{ station.name }}</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Search</button>
+    </form>
+</div>
+
+<div class="cust-m-80" *ngIf="t_find==1">
+    <p>The Available trains on <code>{{ t_station }}</code></p>
+
+    <table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Train Name [Code]</th>
+        <th scope="col">Number</th>
+        <th scope="col">Source</th>
+        <th scope="col">Arrival time</th>
+        <th scope="col">Departured time</th>
+        <th scope="col">Destination</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let train of t_trains">
+            <th scope="row">{{ train.SerialNo }}</th>
+            <td>{{ train.TrainName }}</td>
+            <td>{{ train.TrainNo }}</td>
+            <td>{{ train.Source }}</td>
+            <td>{{ train.ArrivalTime }}</td>
+            <td>{{ train.DepartureTime }}</td>
+            <td>{{ train.Destination }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshRoutes()">
+        </ngb-pagination>
+  
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshRoutes()">
+        <option [ngValue]="2">2 items per page</option>
+        <option [ngValue]="4">4 items per page</option>
+        <option [ngValue]="6">6 items per page</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="cust-m-20" *ngIf="t_find==0">
+    <p class="text-center">No data found</p>
+</div>
