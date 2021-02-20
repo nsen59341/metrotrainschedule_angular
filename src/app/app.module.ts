@@ -33,15 +33,15 @@ import { AvailabletrainsComponent } from './availabletrains/availabletrains.comp
     CustomFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    // RouterModule.forRoot([
-    //   { path: '', component: DashboardComponent },
-    //   { path: 'get-live-satus', component: LivestatusComponent },
-    //   { path: 'get-available-trains', component: AvailabletrainsComponent },
-    //   { path: 'get-train-fare', component: TrainfareComponent },
-    //   { path: 'get-train-schedule', component: TrainscheduleComponent },
-    //   { path: '**', component: Error404Component }
-    // ]),
-    // NgbModule
+    RouterModule.forRoot([
+      { path: '', component: DashboardComponent },
+      { path: 'get-live-satus', component: LivestatusComponent },
+      { path: 'get-available-trains', component: AvailabletrainsComponent },
+      { path: 'get-train-fare', component: TrainfareComponent },
+      { path: 'get-train-schedule', component: TrainscheduleComponent },
+      { path: '**', component: Error404Component }
+    ]),
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

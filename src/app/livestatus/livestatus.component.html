@@ -4,11 +4,17 @@
         <form class="form-group" #f="ngForm" (ngSubmit)="getStatus(f)">
             <div class="form-group">
                 <label for="date" class="mr-10">Choose a Date</label>
-                <input ngModel name="date" #date="ngModel" type="date" class="form-control col-sm-16" id="date">
+                <input ngModel name="date" #date="ngModel" type="date" class="form-control col-sm-16" id="date" required>
+            </div>
+            <div *ngIf="(date.invalid && (date.dirty || date.touched)) || is_invalid_date==true" class="alert alert-danger">
+                <div *ngIf="date.errors.required">Please select a date.</div>
             </div>
             <div class="form-group">
                 <label for="number">Train Number</label>
-                <input ngModel name="numb" #numb="ngModel" type="text" class="form-control col-sm-16" id="number" placeholder="00000000">
+                <input ngModel name="numb" #numb="ngModel" type="text" class="form-control col-sm-16" id="number" placeholder="00000000" required>
+            </div>
+            <div *ngIf="(numb.invalid && (numb.dirty || numb.touched)) || this.is_invalid_train==true" class="alert alert-danger">
+                <div *ngIf="numb.errors.required">Please enter a train number.</div>
             </div>
             <button type="submit" class="btn btn-danger">Search</button>
         </form>

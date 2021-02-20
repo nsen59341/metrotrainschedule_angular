@@ -1,12 +1,17 @@
 <div class="container">
-    <h1>Get Train Schedule</h1>
-    <form class="form-inline" #f="ngForm" (ngSubmit)="getSchedule(f)">
-        <div class="form-group">
-            <label for="number"><b>Train Number</b></label>
-            <input ngModel name="numb" #numb="ngModel" type="text" class="form-control" id="number" placeholder="00000000">
-        </div>
-        <button type="submit" class="btn btn-danger">Search</button>
-    </form>
+    <h1 class="mt-4 mb-5">Get Train Schedule</h1>
+    <div class="row jumbotron">
+        <form class="form-inline" #f="ngForm" (ngSubmit)="getSchedule(f)">
+            <div class="form-group">
+                <label for="number"><b>Train Number</b></label>
+                <input ngModel name="numb" #numb="ngModel" type="text" class="form-control" id="number" placeholder="00000000" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Search</button>
+            <div *ngIf="(numb.invalid && (numb.dirty || numb.touched)) || is_invalid==true" class="alert alert-danger py-1 mb-1">
+                <div *ngIf="numb.errors.required">Please enter a train number.</div>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="cust-m-80" *ngIf="t_find==1">

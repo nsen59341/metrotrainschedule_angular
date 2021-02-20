@@ -1,3 +1,19 @@
 .cust-m-80 {
     margin: 80px;
 }
+label {
+    margin-right: 10px;
+}
+.ng-pgntn {
+    display: -webkit-box im !important;      /* OLD - iOS 6-, Safari 3.1-6 */
+    display: -moz-box i !important;         /* OLD - Firefox 19- (buggy but mostly works) */
+    display: -ms-flexbox i !important;      /* TWEENER - IE 10 */
+    display: -webkit-flex i !important;     /* NEW - Chrome */
+    display: flex i !important;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+    flex-wrap : wrap i !important;
+    -webkit-flex-wrap: wrap i !important;
+}
+
+form .alert {
+    margin-left: 10px;
+}

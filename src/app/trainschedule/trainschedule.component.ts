@@ -15,6 +15,7 @@ export class TrainscheduleComponent implements OnInit {
   pageSize = 6;
   collectionSize;
   troutes;
+  is_invalid = false;
 
   constructor(private trainService: TrainService) { }
 
@@ -22,23 +23,30 @@ export class TrainscheduleComponent implements OnInit {
   }
 
   getSchedule(info){
-    this.trainService.getSchedule(info.value.numb).subscribe(res=> {
-      console.log(res);
-      if( res['ResponseCode'] == 200 )
-      {
-        this.t_find=1;
-        this.t_no = info.value.numb;
-        
-        this.troutes = res['Route'];
-        this.t_routes = this.troutes.map((route, i) => ({id: i + 1, ...route}))
-        .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);;
-        this.collectionSize = this.troutes.length;
-        console.log(this.troutes);
-      }
-      else{
-        this.t_find = 0;
-      }
-    });
+    if(info.invalid==true)
+    {
+      this.is_invalid = true;
+    }
+    else{
+      this.is_invalid = false;
+      this.trainService.getSchedule(info.value.numb).subscribe(res=> {
+        console.log(res);
+        if( res['ResponseCode'] == 200 )
+        {
+          this.t_find=1;
+          this.t_no = info.value.numb;
+          
+          this.troutes = res['Route'];
+          this.t_routes = this.troutes.map((route, i) => ({id: i + 1, ...route}))
+          .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);;
+          this.collectionSize = this.troutes.length;
+          console.log(this.troutes);
+        }
+        else{
+          this.t_find = 0;
+        }
+      });
+    }
   }
 
   refreshRoutes() {
